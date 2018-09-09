@@ -10,16 +10,18 @@ import Select from "react-virtualized-select";
 import spainLocatios from "../data/spainLocations.json"
 import Weather from "./Weather"
 
-const Button = (props) => (
-  <button onClick={props.handleClick}>Get weather</button>
-);
-
-const Content = (props) => {
-  if (props.selectedLocation) {
-    return <Weather selectedLocation={props.selectedLocation} />
-  }
-  return <div>No data yet</div>
+const Button = (props) => {
+  return (
+    <button onClick={props.callback}>Get weather</button>
+  );
 }
+
+// const Content = (props) => {
+//   if (props.selectedLocation) {
+//     return <Weather selectedLocation={props.selectedLocation} />
+//   }
+//   return <div>No data yet</div>
+// }
 
 // class Weather extends Component {
 //   constructor (props) {
@@ -85,8 +87,14 @@ class App extends Component {
     this.setState({selectedLocation});
   }
 
+  goToLocationWeather = () => {
+    if (this.state.selectedLocation) {
+      console.log("Navigates to location id: " + this.state.selectedLocation.id + " wheater Page!");
+    }
+  }
+
   render() {
-    const {selectedLocation, weather} = this.state;
+    const {selectedLocation} = this.state;
 
     return (
       <div className="App">
@@ -99,10 +107,8 @@ class App extends Component {
           onChange={selectedLocation => this.handleChange(selectedLocation)}
           value={selectedLocation}
         />
-        {/* <Button handleClick={this.showWeather}/> */}
-        <Content selectedLocation={selectedLocation} />
-        {/* <Weather locationId={selectedLocation} /> */}
-        <div>{weather} </div>
+        <Button callback={this.goToLocationWeather}/>
+        {/* <Content selectedLocation={selectedLocation} /> */}
       </div>
     );
   }
