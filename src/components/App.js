@@ -1,82 +1,27 @@
 import './App.css';
 
-// Import default styles.
-// This only needs to be done once; probably during bootstrapping process.
 import "react-select/dist/react-select.css";
 import "react-virtualized-select/styles.css";
 
 import React, {Component} from "react";
 import Select from "react-virtualized-select";
+import {Route} from "react-router-dom";
 import spainLocatios from "../data/spainLocations.json"
 import Weather from "./Weather"
 
-const Button = (props) => {
-  return (
-    <button onClick={props.callback}>Get weather</button>
-  );
-}
-
-// const Content = (props) => {
-//   if (props.selectedLocation) {
-//     return <Weather selectedLocation={props.selectedLocation} />
-//   }
-//   return <div>No data yet</div>
-// }
-
-// class Weather extends Component {
-//   constructor (props) {
-//     super(props);
-//     this.state = {
-//       items: [],
-//       isLoaded: false,
-//       error: null
-//     };
-//   }
-//
-//   componentDidMount(props) {
-//     const appid = "bb2e07ba2ba01365ec144453ea7ddfb5";
-//     fetch('http://api.openweathermap.org/data/2.5/weather?id=' + this.props.selectedLocation.id + '&appid=' + appid)
-//       .then(res => res.json())
-//       .then(
-//         (result) => {
-//           this.setState({
-//             isLoaded: true,
-//             items: result.weather
-//           });
-//         },
-//         (error) => {
-//           this.setState({
-//             isLoaded: true,
-//             error
-//           })
-//         }
-//       );
-//   }
-//
-//   render() {
-//     const { error, isLoaded, items } = this.state;
-//     if (error) {
-//       return <div>Error: {error.message}</div>;
-//     } else if (!isLoaded) {
-//       return <div>Loading...</div>;
-//     } else {
-//       return (
-//         <ul>
-//           {items.map(item => (
-//             <li key={item.id}>
-//               {item.main} {item.description}
-//             </li>
-//           ))}
-//         </ul>
-//       );
-//     }
-//   }
-// }
+const Button = (props) => (
+  <Route
+    render={({history}) => (
+      <button type="button" onClick={() => props.callback(history)}>
+        Get weather
+      </button>
+    )}
+  />
+)
 
 class App extends Component {
   constructor (props) {
     super(props);
-
     this.state = {
       selectedLocation: null
     };
@@ -87,9 +32,9 @@ class App extends Component {
     this.setState({selectedLocation});
   }
 
-  goToLocationWeather = () => {
+  showLocationWeather = (history) => {
     if (this.state.selectedLocation) {
-      console.log("Navigates to location id: " + this.state.selectedLocation.id + " wheater Page!");
+      history.push('/locationWeather/' + this.state.selectedLocation.id);
     }
   }
 
@@ -107,8 +52,13 @@ class App extends Component {
           onChange={selectedLocation => this.handleChange(selectedLocation)}
           value={selectedLocation}
         />
-        <Button callback={this.goToLocationWeather}/>
-        {/* <Content selectedLocation={selectedLocation} /> */}
+        <Button callback={this.showLocationWeather}/>
+        <div>
+          <Route
+            path="/locationWeather/:id"
+            component={Weather}
+          />
+        </div>
       </div>
     );
   }
