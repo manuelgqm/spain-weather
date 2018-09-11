@@ -57,11 +57,12 @@ class Weather extends Component {
           {weather.map(item => (
             <li key={item.id}>
               The weather is: {item.main}
+              <img src={"http://openweathermap.org/img/w/" + item.icon + ".png"} style={{'vertical-align': 'middle'}}/>
             </li>
           ))}
-          <li>Temperature: {main.temp}, Min: {main.temp_min}, Max: {main.temp_max}</li>
-          <li>Pressure: {main.pressure}</li>
-          <li>Humidity: {main.humidity}</li>
+          <li>Temperature: <span id="mainTemp">{main.temp}</span>, Min: <span id="minTemp">{main.temp_min}</span>, Max: <span id="maxTemp">{main.temp_max}</span></li>
+          <li>Pressure: <span id="pressure">{main.pressure}</span></li>
+          <li>Humidity: <span id="humidity">{main.humidity}</span></li>
         </ul>
       );
     }
