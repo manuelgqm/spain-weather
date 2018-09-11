@@ -4,6 +4,7 @@ import "react-select/dist/react-select.css";
 import "react-virtualized-select/styles.css";
 
 import React, {Component} from "react";
+import Header from './Header';
 import Select from "react-virtualized-select";
 import {Route} from "react-router-dom";
 import spainLocatios from "../data/spainLocations.json"
@@ -43,9 +44,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Spain Locations Weather</h1>
-        </header>
+        <Header />
         <main>
           <Select
             autoFocus
