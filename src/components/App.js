@@ -44,15 +44,18 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Spain Locations Weather</h1>
         </header>
-        <Select
-          autoFocus
-          options={spainLocatios}
-          onChange={selectedLocation => this.handleChange(selectedLocation)}
-          value={selectedLocation}
-        />
-        <Button callback={this.showLocationWeather}/>
+        <main>
+          <Select
+            autoFocus
+            options={spainLocatios}
+            onChange={selectedLocation => this.handleChange(selectedLocation)}
+            value={selectedLocation}
+            className="locationSelect"
+          />
+          <Button callback={this.showLocationWeather}/>
+        </main>
         <div>
           <Route
             path="/locationWeather/:id"

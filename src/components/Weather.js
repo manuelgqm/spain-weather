@@ -26,7 +26,8 @@ class Weather extends Component {
 
   fetchWeather(locationId) {
     const appid = "bb2e07ba2ba01365ec144453ea7ddfb5";
-    fetch('http://api.openweathermap.org/data/2.5/weather?id=' + locationId + '&appid=' + appid)
+    const endpoint = 'http://api.openweathermap.org/data/2.5/weather'
+    fetch(endpoint + '?id=' + locationId + '&appid=' + appid)
     .then(res => res.json())
     .then(
       (result) => {
