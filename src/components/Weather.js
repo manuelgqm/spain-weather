@@ -57,8 +57,8 @@ class Weather extends Component {
         <ul>
           {weather.map(item => (
             <li key={item.id}>
-              The weather is: {item.main}
-              <img src={"http://openweathermap.org/img/w/" + item.icon + ".png"} style={{'vertical-align': 'middle'}}/>
+              The weather is:
+              <img src={"http://openweathermap.org/img/w/" + item.icon + ".png"} alt={item.main}/>
             </li>
           ))}
           <li>Temperature: <span id="mainTemp">{main.temp}</span>, Min: <span id="minTemp">{main.temp_min}</span>, Max: <span id="maxTemp">{main.temp_max}</span></li>
