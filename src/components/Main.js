@@ -3,9 +3,6 @@ import Select from "react-virtualized-select";
 import spainLocatios from "../data/spainLocations.json"
 import Button from './Button'
 
-import "react-select/dist/react-select.css";
-import "react-virtualized-select/styles.css";
-
 class Main extends Component {
   constructor (props) {
     super(props);
@@ -19,9 +16,13 @@ class Main extends Component {
   }
 
   showLocationWeather = (history) => {
-    if (this.state.selectedLocation) {
-      history.push('/locationWeather/' + this.state.selectedLocation.id);
+    let newUrl = '/';
+    if (!this.state.selectedLocation) {
+      return newUrl;
     }
+    newUrl = '/locationWeather/' + this.state.selectedLocation.id;
+    history.push(newUrl);
+    return newUrl;
   }
 
   render() {
