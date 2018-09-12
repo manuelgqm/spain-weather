@@ -43,23 +43,22 @@ describe('Main component', () => {
     expect(main.state.selectedLocation).to.deep.equal(selectedLocation);
   });
 
-  it('dont shows locationWeather if no location selected', () => {
+  it('goes nowhere if no location selected', () => {
     const main = mainWrapper.instance();
     const newLocation = main.showLocationWeather();
-    const selectedLocation = null;
-
-    main.handleChange(selectedLocation);
+    main.state.selectedLocation = null;
 
     expect(newLocation).to.equal("/");
   });
 
-  it('goes to locationWeather when location selected and "get weather is clicked"', () => {
+  it('goes to locationWeather when location selected', () => {
     const main = mainWrapper.instance();
     const selectedLocation = { id: 0 };
     const historyMock = { push: cy.stub() };
+    main.state.selectedLocation = selectedLocation;
 
-    main.handleChange(selectedLocation);;
     const newLocation = main.showLocationWeather(historyMock);
+
     expect(newLocation).to.equal('/locationWeather/0');
   });
 
