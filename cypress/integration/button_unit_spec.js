@@ -17,23 +17,27 @@ chai.use(chaiEnzyme())
 
 describe('Unit Test for Button', function(){
   it('displays button', function(){
-    const component = mount(
+    const wrapper = mount(
       <MemoryRouter>
         <Button />
       </MemoryRouter>
     );
-    expect(component.find('button')).to.be.present();
+
+    expect(wrapper.find('button')).to.be.present();
+    wrapper.unmount();
   });
 
   it('clicks button', function(){
     const callback = cy.stub();
-    const component = mount(
+    const wrapper = mount(
       <MemoryRouter>
         <Button callback={callback}/>
       </MemoryRouter>
     );
-    component.find('button').simulate('click');
+    wrapper.find('button').simulate('click');
+
     expect(callback).to.be.called;
+    wrapper.unmount();
   });
 
 })
