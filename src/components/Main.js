@@ -1,20 +1,10 @@
 import React, {Component} from "react";
 import Select from "react-virtualized-select";
-import {Route} from "react-router-dom";
 import spainLocatios from "../data/spainLocations.json"
+import Button from './Button'
 
 import "react-select/dist/react-select.css";
 import "react-virtualized-select/styles.css";
-
-const Button = (props) => (
-  <Route
-    render={({history}) => (
-      <button type="button" onClick={() => props.callback(history)}>
-        Get weather
-      </button>
-    )}
-  />
-)
 
 class Main extends Component {
   constructor (props) {
